@@ -28,5 +28,13 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-mdx',
+      options: {
+        defaultLayouts: {
+          default: require.resolve('./src/components/Layout.js'),
+        },
+      },
+    },
   ],
 };

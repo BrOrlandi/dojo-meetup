@@ -1,16 +1,21 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
+import Image from 'gatsby-image';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import Logo from '../assets/images/logo.png';
 import '../styles/home.css';
 
-const IndexPage = () => (
+
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO />
     <div className="home__logo">
-      <img src={Logo} alt="Logo do Campinas Front-end" />
+      <Image
+        fluid={data.file.childImageSharp.fluid}
+        alt="Logo do Campinas Front-end"
+        fadeIn={false}
+      />
     </div>
     <h1>Eventos</h1>
     <p>Participe dos meetups e outros eventos do Campinas Front-end, veja quais já ocorreram:</p>
@@ -46,5 +51,18 @@ const IndexPage = () => (
     </p>
   </Layout>
 );
+
+export const queryLogo = graphql`
+query MyQuery {
+  file(relativePath: {eq: "logo.png"}) {
+    id
+    childImageSharp {
+      fluid(maxWidth: 1024) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+}
+`;
 
 export default IndexPage;
